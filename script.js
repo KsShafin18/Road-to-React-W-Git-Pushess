@@ -10,6 +10,11 @@ homeBtn.onclick = function() {
     viewHome()
 }
 
+let profileBtn =document.getElementById("profile")
+profileBtn.onclick = function() {
+    viewProfile()
+}
+
 // funtions er kaj kam
 function viewAbout(){
     console.log('click ta kaj korse')
@@ -20,3 +25,6 @@ function viewHome() {
     window.location.href ="index.html"
 }
 
+function viewProfile() {
+    window.location.href ="profile.html"
+}

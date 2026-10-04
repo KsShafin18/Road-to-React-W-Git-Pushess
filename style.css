@@ -68,7 +68,7 @@ width: 50%;
     margin-top: 25px;
     display: flex;
     justify-content: space-between;
-    gap: 50px;
+    gap: 30px;
     justify-items: center;
     
     padding: 20px;
@@ -87,14 +87,18 @@ width: 50%;
     font-family: 'Times New Roman', Times, serif;
     background-color: rgba(10, 142, 230, 0.808);
 }
-.about_photo{
+/* .about_photo{
     width: 50%;
 }
 .about_content{
     width: 50%;
+} */
+
+.profile{
+    justify-content: center;
+    display: flex;
+    margin-top: 20px;
 }
-
-
 
 
 
