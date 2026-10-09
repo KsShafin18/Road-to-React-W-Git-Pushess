@@ -1,45 +1,70 @@
 
 import os
-from google import genai
 from dotenv import load_dotenv
+from groq import Groq
+from google import genai
 
-# Load API key
 load_dotenv()
-api_key = os.getenv("GEMINI_API_KEY")
 
-if not api_key:
-    print("Please add your Gemini API key to .env")
-    exit()
+# Provider change korlei AI change hobe
+AI_PROVIDER = os.getenv("AI_PROVIDER", "groq").lower()
 
-# Create Gemini client
-client = genai.Client(api_key=api_key)
 
-# Start chat
-chat = client.chats.create(
-    model="gemini-3.8-flash"
-)
+def ask_ai(question):
+    if AI_PROVIDER == "groq":
+        client = Groq(
+            api_key=os.getenv("GROQ_API_KEY")
+        )
 
-print("\n Ks-GPT:")
-print("Type 'exit' to quit.\n")
+        response = client.chat.completions.create(
+            model="openai/gpt-oss-20b",
+            messages=[
+                {"role": "user", "content": question}
+            ]
+        )
+
+        return response.choices[0].message.content
+
+    elif AI_PROVIDER == "gemini":
+        client = genai.Client(
+            api_key=os.getenv("GEMINI_API_KEY")
+        )
+
+        response = client.models.generate_content(
+            model="gemini-3.8-flash",
+            contents=question
+        )
+
+        return response.text
+
+    else:
+        return "Unknown AI provider!"
+
+
+print("🤖 ShafinGPT:Ask Here!")
+print("Type 'exit' to stop.\n")
 
 while True:
     question = input("You: ").strip()
 
     if question.lower() == "exit":
-        print("Bot: Goodbye!")
         break
 
     if not question:
         continue
 
     try:
-        response = chat.send_message(question)
-        print("\nBot:", response.text, "\n")
+        answer = ask_ai(question)
+        print("\nBot:", answer, "\n")
 
     except Exception as error:
-        print("Something went wrong:", error)
+        print("\nError:", error, "\n")
 
 
-    #Notes
-        # .env namer envioment banao pore oitay
-        # GEMINI_API_KEY= pore nijer api dao
+
+        # attachments:
+        
+        # AI_PROVIDER=groq
+
+        # GROQ_API_KEY=
+        # GEMINI_API_KEY=
