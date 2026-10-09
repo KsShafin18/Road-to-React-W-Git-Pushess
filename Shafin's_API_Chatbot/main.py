@@ -38,3 +38,8 @@ while True:
 
     except Exception as error:
         print("Something went wrong:", error)
+
+
+    #Notes
+        # .env namer envioment banao pore oitay
+        # GEMINI_API_KEY= pore nijer api dao
