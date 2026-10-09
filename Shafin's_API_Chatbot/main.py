@@ -63,7 +63,8 @@ while True:
 
 
         # attachments:
-        
+
+        # make a file name .env then add these 
         # AI_PROVIDER=groq
 
         # GROQ_API_KEY=
